@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: sans-serif;
+        line-height: 1.6;
+    }
+    nav {
+        position: fixed;
+        background: rgb(167, 3, 3);
+        height: 50px;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        padding: 0 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo {
+        font-size: 24px;
+        color: #fff;
+    }
+    .link {
+        list-style: none;
+        display: flex;
+    }
+    .link li {
+        margin-left: 20px;
+    }
+    .link a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 1rem;
+        position: relative;
+        transition: color 0.3s;
+    }
+    .link a:hover {
+        color: black;
+    }
+    .link a::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 8%;
+        background: #fff;
+        height: 2px;
+        visibility: hidden;
+        transition: all 0.3s ease-in;
+    }
+    .link a:hover::before {
+        visibility: visible;
+        transform: scaleX(1);
+    }
+    #nav-toggle {
+        display: none;
+    }
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+    }
+    .line {
+        width: 30px;
+        height: 5px;
+        background: #fff;
+        margin: 5px;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+    .hero {
+        margin-top: 50px;
+        background-image: url('images/FB_IMG_17277954750357545.jpg');
+        background-attachment: fixed;
+        background-size: cover; 
+        background-position: center;
+        background-repeat: no-repeat;
+        justify-content: center;
+        display: flex;
+        color: rgb(0, 0, 0);
+        text-align: left;
+        position: relative;
+        font-size: 70px;
+    }
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .hero-content {
+        z-index: 1;
+    }
+    p {
+        padding: 10px;
+        color: #fff;
+        font-size: 30px;
+    }
+    h1 {
+        color: red;
+        font-family: sans-serif;
+        margin-bottom: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #ff9800;
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: transparent;
+    }
+    button:active {
+        transform: translateY(3px);
+        box-shadow: 0 2px 0 #006599;
+    }
+    bold {
+        font-size: 40px;
+        font-family: 'Times New Roman', Times, serif;
+        color: red;
+    }
+    .me {
+        color: red;
+        margin: 20px;
+        font-family: Verdana, "sans-serif";
+        text-align: center;
+    }
+    img {
+        width: 220px;
+        height: 380px;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+    .box {
+        margin: 2px;
+        padding: 20px;
+        color: white;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 0px;
+    }
+    .box1{
+        flex: 1;
+    }
+    .box2 {
+        background-color: black;
+        flex: 2;
+        width: 300px;
+        height: 430px;
+    }
+    .box3{
+        flex: 1;
+    }
+    .work {
+        background-color: rgb(163, 98, 0);
+        border-radius: 8px;
+        text-align: center;
+        font-family: 'sans-serif';
+        font-size: 40px;
+        
+    }
+    .work-contain {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+    .bo {
+        margin: 20px;
+        padding: 20px;
+        color: white;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 10px;
+        align-items: center;
+        transition: background-color 0.3s ease;
+    }
+    .bo:hover {
+        background-color: rgb(127, 0, 50);
+    }
+    .bo1{
+        background-color: black;
+        flex: 1;
+        width: 400px;
+        height: 930px;
+    }
+    .bo2 {
+        background-color: black;
+        flex: 1;
+        width: 400px;
+        height: 930px;
+    }
+    .bo3{
+        background-color: black;
+        flex: 1;
+        width: 400px;
+        height: 930px;
+    }
+    .imgr {
+        background-color: rgb(19, 0, 0);
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+    .img {
+        margin: 20px;
+        padding: 0px;
+        color: white;
+        text-align: center;
+        align-items: center;
+        font-size: 20px;
+        border-radius: 10px;
+        align-items: center;
+    }
+    .img1{
+        background-color: black;
+        flex: 1;
+        width: 400px;
+        height: 500px;
+    }
+    .img2 {
+        background-color: black;
+        flex: 1;
+        width: 400px;
+        height: 500px;
+    }
+    .img3{
+        background-color: black;
+        flex: 1;
+        width: 400px;
+        height: 500px;
+    }
+    .contat {
+        align-items: center;
+        text-align: center;
+        margin-top: 30px;
+    }
+    h3 {
+        font-size: 30px;
+    }
+    .login-container {
+        background-color: white;
+        padding: 20px;
+        width: 300px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+    .login-container:hover {
+        box-shadow: 0px 4px 10px rgba(54, 0, 0, 0.1);
+    }
+    .login-container h3 {
+        color: #f13c04;
+        text-align: center;
+    }
+    .input-group {
+        margin-bottom: 15px;
+    }
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .input-group input {
+        width: 20%;
+        height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #dddfe2;
+        border-radius: 5px;
+    }
+    .meme {
+        height: 70%;
+    }
+    .login-button {
+        width: 20%;
+        background-color: #ca1305;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .login-button:hover {
+        background-color: #165dbb;
+    }
+    .response {
+        margin-top: 10px;
+        text-align: center;
+        color: #28a745;
+        font-size: 16px;
+    }
+    footer {
+        box-sizing: border-box;
+        color: white;
+        text-align: center;
+        margin-top: 50px;
+        background-color: rgb(27, 0, 0);
+    }
+</style>
+<body>
+    <nav>
+        <input type="checkbox" id="nav-toggle">
+        <div class="logo">Portfolio</div>
+        <ul class="link">
+            <li><a href="#home">home</a></li>
+            <li><a href="#about">about</a></li>
+            <li><a href="#work">work</a></li>
+            <li><a href="#team">team</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+        <label for="nav-toggle" class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </label>
+    </nav>
+    <section id="home">
+        <div class="hero">
+            <div class="hero-overlay"></div> <!-- Optional overlay for contrast -->
+            <div class="hero-content">
+                <p>HELLO, My name is</p>
+                <h1>v-star Animation</h1>
+                <p>I am an <bold>ANIMATOR</bold> and <bold>FREELANCER</bold></p>
+                <BUtton><a href="#" class="btn">HIRE ME</a></BUtton>
+            </div>
+        </div>
+    </section>
+    <section id="about">
+        <div>
+            <div class="me">
+                <h2><u>about me</u></h2>
+            </div>
+            <div class="container">
+                <div class="box box1">
+                    <img src="images/FB_IMG_17272676295320224.jpg">
+                </div>
+                <div class="box box2">
+                    As a young and dynamic professional in the tech industry, I am a Frontend Developer with a strong focus on creating captivating and user-friendly digital experiences. My expertise encompasses a comprehensive skill set, including HTML5, CSS3, JavaScript, PHP, and CSS, with an additional specialization in UI/UX design using Figma. I bring an unwaving dedication to not only pushing boundaries but also delivering solution that transcend Expectations.</div>
+            </div>
+            <div class="box box3">
+                <BUtton><a href="#" class="btn">HIRE ME</a></BUtton>
+            </div>
+        </div>
+    </section>
+    <section id="work">
+        <div class="work"> <b>work</b>
+            <div class="work-contain">
+                <div class="bo bo1">Experienced web developer with a strong portfolio of responsive and dynamic websites.Proficient in front-end and back-end technologies such as HTML,CSS,JavaScript,and various frameworks/libraries.Skilled in building custom web applications,optimizing site performance and ensuring cross-browser compatibility.Collaborative team player with a focus on delivering efficient,scalable and user-friendly solutions. Dedicated to continuous learning and staying abreast of emerging web technologies.</div>
+                <div class="bo bo2">Specializing in creating intuitive and visually appealing digital experiences.Proficient in user research,wireframing,prototyping and interface design,with a keen eye for detail and user-centric design principles.Skilled in collaborating with cross-functional teams to translate client requirements into engaging user interfaces.Passionate about crafting seamless user journeys and enhancing overall user satisfaction.Committed to staying updated on industry trends and technologies to deliver cutting-edge designs.</div>
+                <div class="bo bo3">Experienced freelancer with a proven track record of delivering high-quality projects on time and within budget.Proficient at problem-solving and collaborating with clients to understand their needs and deliver tailored solutions.Strong communication skills and a dedication to exceeding client expectations.Seeking new opportunities to leverage expertise and contribute to impactful projects.</div>
+            </div>
+        </div>
+    </section>
+    <section id="team">
+        <div class="imgr">
+            <div class="img img1">
+                <img src="images/FB_IMG_17272676295320224.jpg" alt="senior animator">
+                senior animator:for 2d and 3d
+            </div>
+            <div class="img img2">
+                <img src="images/FB_IMG_17273584610644192.jpg" alt="senior animator">
+                tutor:2d and 3d
+            </div>
+            <div class="img img3">
+                <img src="images/FB_IMG_17273585347011473.jpg" alt="senior animator">
+            expert: programmer
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="contat">
+            <h3><b><u>MESSAGE ME</u></b></h3>
+            <div class="input-group">
+                <input type="text" id="email" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="subject">
+            </div>
+            <div class="input-group">
+                <input type="text" id="message" placeholder="message">
+            </div>
+            <button class="login-button" onclick="showResponse()"><b><u>MESSAGE ME</u></b></button>
+            <div id="response" class="response"></div>
+        </div>
+    </section>
+    <footer>
+        2024 copyright|all right perserved
+    </footer>
+
+</body>
+</html>

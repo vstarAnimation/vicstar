@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        background: #f2f2f2;
+    }
+    header{
+        background: #333;
+        height: 75px;
+        /* width: 100%; */
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        justify-content: center;
+        display: flex;
+        position: fixed;
+    }
+    nav{
+        padding: 0 10px;
+        display: flex;
+        /* max-width: 1200px; */
+        /* width: 100%; */
+        align-items: center;
+        height: 75px;
+        z-index: 5;
+    
+    }
+    nav .nav-links{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    nav .nav-links li{
+        list-style: none;
+    }
+    nav .nav-links a{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-decoration: none;
+        padding: 2em;
+        color: #f2f2f2;
+        float: right;
+        width: 60%;
+        font-size: 20px;
+        position: relative;
+    }
+    nav .links a::before{
+      content: "";
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 80%;
+      height:2px;
+      background: #fff;
+      visibility: hidden;
+      transform: scaleX(0);
+      transition: all 0.5s ease-in-out;
+    }
+    nav .links a:hover::before{
+      transform: scaleX(1);
+      visibility: visible;
+    }
+    #hamburger{
+      position: absolute;
+      top: -100px;
+    }
+    nav .icon-burger{
+      display:none;
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    nav .icon-burger .line{
+      width: 30px;
+      height: 5px;
+      background: #fff;
+      /* position: absolute; */
+      margin: 5px;
+      display: block;
+      border-radius: 3px;
+      transition: all 0.5s ease-in-out;
+    
+    }
+    
+    nav .logo{
+        align-items: center;
+        height: 75px;
+        color: #f2f2f2;
+        width: 40%;
+        font-size: 24px;
+        padding: 1em;
+        display: flex;
+    }
+    nav input #hamburger{
+        display: none;
+        top:-100px;
+        position: absolute;
+    }
+    
+    header a, footer a{
+        text-decoration: none;
+        /* color: #333; */
+        height: 45px;
+        padding: 20px;
+        display: inline-block;
+        text-align: center;
+    }
+    header a:hover, footer a:hover{
+        color: #ddd;
+    }
+    
+    .hero {
+        margin-top: 50px;
+        background-image: url('images/FB_IMG_17277954750357545.jpg');
+        background-attachment: fixed;
+        background-size: cover; 
+        background-position: center;
+        background-repeat: no-repeat;
+        justify-content: center;
+        display: flex;
+        color: rgb(255, 231, 231);
+        text-align: left;
+        position: relative;
+        font-size: 70px;
+    }
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .hero-content {
+        z-index: 1;
+    }
+    section{
+        padding: 100px;
+        align-items: center;
+    }
+    .max-width{
+        padding:0 80px;
+        max-width:1400px;
+        margin: auto;
+    }
+    .services-content,
+    .portfolio-content,
+    .about-content,
+    .teams-content,
+    .contact-content{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .hero .max-width{
+        display: flex;
+        height: 85%;
+        z-index: 3;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        flex-direction: column;
+    }
+    .hero .max-width .text1{
+        font-size: 70px;
+        font-weight: bold;
+    }
+    .hero .max-width .text2{
+        font-size: 25px;
+        text-align: center;
+    }
+    .hero .max-width a{
+        padding: 12px 36px;
+        background: #fff;
+        color: #222;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+        font-size: 22px;
+        font-weight: 700;
+        transition: all 0.3s ease-in-out;
+        margin-top: 20px;
+    }
+    .hero .max-width a:hover{
+        background: 0;
+        border: 2px solid #111;
+        color: #000;
+        cursor: pointer;
+    }
+    
+    /* titke */
+    .title{
+        font-size: 2rem;
+        text-align: center;
+        text-transform: capitalize;
+    }
+     section p{
+        text-align: center;
+        font-size: 17px;
+    }
+    .services-content .card,
+    .portfolio-content .card{
+        width:calc(33% - 20px);
+        text-align: center;
+        background: #fff;
+        box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+        margin-top: 20px;
+        transition: all 0.5s ease-in-out;
+        border-radius: 6px;
+        position: relative;
+       
+    }
+    
+    .services-content .card img
+    {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        /* margin-top: 20px; */
+        border-bottom: 20px;
+        /* margin-left: 7rem; */
+        margin: 10px auto;
+    }
+    .services-content .card h3,
+    .portfolio-content .card h3{
+        margin-bottom: 7px;
+        font-weight: bold;
+        text-transform: capitalize;
+        font-size:20px;
+    }
+    .services-content .card p,
+    .portfolio-content .card p{
+        margin:20px ;
+    }
+    .services-content .card:hover{
+        transform: scale(0.9);
+        cursor: pointer;
+        opacity: 0.7;
+    }
+    .portfolio-content .card img{
+        width: 100%;
+      padding-bottom: 10px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 7px;
+    }
+    .portfolio-content .card a{
+      top: 25%;
+      right:180px;
+      text-align: center;
+      color: #000;
+      font-size: 30px;
+      position: absolute;
+      /* transition: all 0.3s ease-in-out; */
+      background: #fff;
+      width:70px;
+      height: 70px;
+      text-align: center;
+      border-radius: 100%;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+    .portfolio-content .card a:hover{
+      opacity: 1;
+    }
+    .portfolio-content .card a i{
+      margin: 20px;
+    }
+    .portfolio-content .card a i:hover{
+      opacity: 10%;
+    }
+    .about-content .about-card{
+        width: 100%;
+        height: 200px;
+        background: #fff;
+        border-radius: 6px;
+        margin: 20px;
+        box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+    }
+    .about-content .about-card h3{
+        margin: 20px;
+        text-transform: capitalize;
+        font-size: 20px;
+    }
+    .about-content .about-card p{
+        margin: 20px;
+        text-align: justify;
+    }
+    .about-content .about-card:hover,
+    .teams .card:hover{
+        transform: scale(1.1);
+        color: #555;
+    }
+    .teams .teams-content .card img{
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      margin: 20px;
+    }
+    .teams .teams-content .card{
+      width: calc(33% - 30px);
+      height: 270px;
+      justify-content: center;
+      background: #333;
+      border-radius: 6px;
+      color: #fff;
+      align-items: center;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .contacts .contact-content .column{
+    /* max-width: 0;   */
+    width: calc(30% -20px);
+    
+    }
+    /* .contacts .contact-content .left p a, */
+    .contacts .contact-content .left p {
+      text-align: left;
+      /* padding: 10px; */
+      margin-left: 5px;
+      display: flex;
+    }
+    
+    .contacts .contact-content .left p i{
+      text-decoration: none;
+      margin-top: 5px;
+    }
+    .contacts .contact-content .left p a
+    {
+      text-decoration: none;
+      margin-left: 10px;
+    }
+    
+    .contacts .contact-content .right{
+      margin: 2rem;
+    }
+    .contacts .contact-content .right p{
+      text-align: left;
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .contacts .contact-content .right form{
+      display: block;
+      width: 500px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    .contacts .contact-content .right form label{
+      display: block;
+      margin-bottom:7px ;
+      padding: 5px;
+      text-transform: capitalize;
+      color: #333;
+    }
+    .contacts .contact-content .right form input, textarea{
+      padding: 10px;
+      width: 1;
+      outline: none;
+      border: 2px solid #b3b3b3;
+      border-radius: 6px;
+    }
+    .contacts .contact-content .right form button{
+      padding: 10px;
+      color: #fff;
+      background:green;
+      width: 200px;
+      border: none;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    footer{
+      background: #333;
+      color: #fff;
+      display: flex;
+      /* position: fixed; */
+    }
+    footer div span i {
+      align-items: center;
+      margin-top: 20px;
+    
+    }
+    footer  span {
+      align-items: center;
+      justify-content: end;
+      display: flex;
+      margin-right: 20px;
+      /* margin-top: 10px; */
+    
+    }
+    footer span a{
+      color: #fff;
+      align-items: center;
+      justify-content: end;
+    
+    }
+</style>
+<body>
+    <header>
+        <nav>
+            <input type="checkbox" id="hamburger">
+            <label for="hamburger" class="icon-burger" id="icon-burger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </label>
+            <div class="logo"><strong><b>v-star</b></strong> animation</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#service">Sevices</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contacts">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- section for hero page -->
+    <section class="hero" id="home">
+        <div class="max-width">
+                <div class="text1">Connect with us worldwide</div>
+                <div class="text2">Discover top-quality camping gear for unforgettable outdoor adventures. <br> Gear up and make lasting memories.
+                </div>
+                <a href="#service">Our services</a>
+            </div>
+        </div>
+    </section>
+    <!-- section for hero page end-->
+    <!-- section for services -->
+    <section class="services" id="service">
+        <div class="max-width">
+            <h2 class="title">Our services</h2>
+            <p class="title-text">gfxdcvnbgfgcgvgfc</p>
+            <div class="services-content">
+                <div class="card">
+                    <img src="images/FB_IMG_17272676295320224.jpg" alt="img">
+                    <h3>Web development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed fugit esse optio, veritatis consequatur, quaerat soluta nulla dolor illo, nemo eligendi eius 
+                        voluptatum sequi corrupti ipsam! Quam temporibus adipisci dolorem?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17273584610644192.jpg" alt="img">
+                    <h3>Web development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed fugit esse optio, veritatis consequatur, quaerat soluta nulla dolor illo, nemo eligendi eius 
+                        voluptatum sequi corrupti ipsam! Quam temporibus adipisci dolorem?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17273585347011473.jpg" alt="img">
+                    <h3>Web development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed fugit esse optio, veritatis consequatur, quaerat soluta nulla dolor illo, nemo eligendi eius 
+                        voluptatum sequi corrupti ipsam! Quam temporibus adipisci dolorem?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17272676295320224.jpg" alt="img">
+                    <h3>Web development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed fugit esse optio, veritatis consequatur, quaerat soluta nulla dolor illo, nemo eligendi eius 
+                        voluptatum sequi corrupti ipsam! Quam temporibus adipisci dolorem?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17273584610644192.jpg" alt="img">
+                    <h3>Web development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed fugit esse optio, veritatis consequatur, quaerat soluta nulla dolor illo, nemo eligendi eius 
+                        voluptatum sequi corrupti ipsam! Quam temporibus adipisci dolorem?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17273585347011473.jpg" alt="img">
+                    <h3>Web development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed fugit esse optio, veritatis consequatur, quaerat soluta nulla dolor illo, nemo eligendi eius 
+                        voluptatum sequi corrupti ipsam! Quam temporibus adipisci dolorem?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section for services ends -->
+
+
+
+    <!-- section for porfolio  -->
+    <section class="portfolio" id="portfolio">
+        <div class="max-width">
+            <h2 class="title">Our portfolio</h2>
+            <p class="title-text">Lorem ipsum dolor sit amet.</p>
+            <div class="portfolio-content">
+                <div class="card">
+                    <img src="images/FB_IMG_17277954480005546 - Copy.jpg" alt="images">
+                    <a href="https://vecfutreseekers.blogspot.com"><i class="fa fa-link"></i></a> 
+                    <h3>my vicfolio</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rem laborum voluptatem doloribus consectetur quisquam nam iusto. Officia qui accusamus earum, velit reprehenderit mollitia ut, 
+                        maxime, quibusdam magnam placeat magni?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17277954480005546 - Copy.jpg" alt="images">
+                    <a href="https://vecfutreseekers.blogspot.com"><i class="fa fa-link"></i></a> 
+                    <h3>my vicfolio</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rem laborum voluptatem doloribus consectetur quisquam nam iusto. Officia qui accusamus earum, velit reprehenderit mollitia ut, 
+                        maxime, quibusdam magnam placeat magni?</p>
+                    </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17277954480005546 - Copy.jpg" alt="images">
+                    <a href="https://vecfutreseekers.blogspot.com"><i class="fa fa-link"></i></a> 
+                    <h3>my vicfolio</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rem laborum voluptatem doloribus consectetur quisquam nam iusto. Officia qui accusamus earum, velit reprehenderit mollitia ut, 
+                        maxime, quibusdam magnam placeat magni?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17277954480005546 - Copy.jpg" alt="images">
+                    <a href="https://vecfutreseekers.blogspot.com"><i class="fa fa-link"></i></a> 
+                    <h3>my vicfolio</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rem laborum voluptatem doloribus consectetur quisquam nam iusto. Officia qui accusamus earum, velit reprehenderit mollitia ut, 
+                        maxime, quibusdam magnam placeat magni?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17277954480005546 - Copy.jpg" alt="images">
+                    <a href="https://vecfutreseekers.blogspot.com"><i class="fa fa-link"></i></a> 
+                    <h3>my vicfolio</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rem laborum voluptatem doloribus consectetur quisquam nam iusto. Officia qui accusamus earum, velit reprehenderit mollitia ut, 
+                        maxime, quibusdam magnam placeat magni?</p>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17277954480005546 - Copy.jpg" alt="images">
+                    <a href="https://vecfutreseekers.blogspot.com"><i class="fa fa-link"></i></a> 
+                    <h3>my vicfolio</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rem laborum voluptatem doloribus consectetur quisquam nam iusto. Officia qui accusamus earum, velit reprehenderit mollitia ut, 
+                        maxime, quibusdam magnam placeat magni?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section for porfolio ends -->
+
+
+    <!-- section for about page -->
+    <section class="about" id="about">
+        <div class="max-width">
+            <h2 class="title">About v-star</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3>OUr Mission</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                         Nobis quod aspernatur praesentium, expedita accusamus assumenda mi
+                         nus labore officiis ipsa minima numquam perspiciatis enim co
+                         nsequuntur maiores, vitae doloremque laboriosam in commodi?</p>
+                </div>
+                <div class="about-card">
+                    <h3>OUr Vision</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                         Nobis quod aspernatur praesentium, expedita accusamus assumenda mi
+                         nus labore officiis ipsa minima numquam perspiciatis enim co
+                         nsequuntur maiores, vitae doloremque laboriosam in commodi?</p>
+                    </div>
+            </div>
+        </div>
+       
+    </section>
+    <!-- section for about page ends -->
+
+    <!-- section for teams -->
+    <section class="teams" id="teams">
+        <div class="max-width">
+            <h2 class="title">Teams</h2>
+            <p class="title-text">Lorem ipsum dolor sit amet.</p>
+            <div class="teams-content">
+                <div class="card">
+                    <img src="images/FB_IMG_17272676295320224.jpg" alt="img">
+                    <h3>SULE</h3>
+                    <span>oga me</span>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17273584610644192.jpg" alt="img">
+                    <h3>SULE</h3>
+                    <span>oga me</span>
+                </div>
+                <div class="card">
+                    <img src="images/FB_IMG_17273585347011473.jpg" alt="img">
+                    <h3>SULE</h3>
+                    <span>oga me</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section for teams -->
+
+    <!-- section for contacts -->
+    <section class="contacts" id="contacts">
+        <div class="max-width">
+            <h2 class="title">Contacts</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <div class="contact-content">
+                <div class="column left">
+                    <p><i class="fa fa-map-marker-alt"></i><a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.261830547884!2d3.353261784384873!3d6.61435637630984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b93b65ba86e15%3A0x3ae060fb3436c3ad!2sIkeja%20City%20Mall!5e0!3m2!1sen!2sng!4v1715372385063!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>ikeja,lagos State</a></p>
+                    <p><i class="fa fa-envelope"></i><a href="mailto:vicstar592@gmail.com">vicstar592@gmail.com</a></p>
+                    <p><i class="fa fa-phone"></i><a href="tel:08134409393">(+234)8134409393</a></p>
+                    <p><i class="fa fa-clock"></i>     Monday - Friday: 9:00 AM - 5:00 PM</p>
+                    <p><i class="fa fa-clock"></i> Saturday: 10:00 AM - 3:00 PM</p>
+                    <p><i class="fa fa-clock"></i> Sunday: Closed</p>
+                    <p><i class="fas fa-globe"></i> <a href="https://vecfutreseekers.blogspot.com">https://vecfutreseekers.blogspot.com (website)</a></p>
+                </div>
+                <div class="column right">
+                    <p>Get in touch</p>
+                    <form method='post'><input type='hidden' name='form-name' value='form 1' />
+                        <label for="Name">Name:</label>
+                        <input type="text" placeholder="enter your name" required>
+                        <label for="Name">Email: </label>
+                        <input type="text" placeholder="enter your mail" required>
+                        <label for="Name">Inquiry:</label>
+                        <textarea name="ask" id="" cols="30" rows="5"></textarea>
+                        <button type="submit">Send message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section for contacts end-->
+
+
+    <footer>
+        <div class="max-width">
+             <div<span>Created by Gracedesigns<i class="fas fa-copyright"></i>Copyright.2024. Allright Reserved</span>
+        </div>
+          <span class="links">
+            <a href="#home">Home</a>
+            <a href="#contacts">Contacts</a>
+        </span> 
+        </div>
+       
+    </footer>
+</body>
+</html>
